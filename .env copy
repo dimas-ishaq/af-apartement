@@ -1,0 +1,27 @@
+
+
+# This was inserted by `prisma init`:
+# Environment variables declared in this file are automatically made available to Prisma.
+# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+# SET APP
+PORT=5000
+APP_URL=http://localhost
+
+# DATABASE URL
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/af_apartement?schema=public"
+
+#NODE MAILER
+NODE_MAILER_HOST=sandbox.smtp.mailtrap.io
+NODE_MAILER_PORT=465
+NODE_MAILER_SECURE=true
+NODE_MAILER_USER=dab8dc8ead0d8f
+NODE_MAILER_PASSWORD=4c80a80606aae3
+
+#JWT SECRET TOKEN
+ACCESS_TOKEN_SECRET=access_token_secret_af_apartement
+REFRESH_TOKEN_SECRET=refresh_token_secret_af_apartement
+CONFIRMATION_EMAIL_SECRET= confirmation_email_secret_af_apartement
