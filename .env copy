@@ -15,13 +15,13 @@ APP_URL=http://localhost
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/af_apartement?schema=public"
 
 #NODE MAILER
-NODE_MAILER_HOST=sandbox.smtp.mailtrap.io
-NODE_MAILER_PORT=465
-NODE_MAILER_SECURE=true
-NODE_MAILER_USER=dab8dc8ead0d8f
-NODE_MAILER_PASSWORD=4c80a80606aae3
+NODE_MAILER_HOST=
+NODE_MAILER_PORT=
+NODE_MAILER_SECURE=
+NODE_MAILER_USER=
+NODE_MAILER_PASSWORD=
 
 #JWT SECRET TOKEN
-ACCESS_TOKEN_SECRET=access_token_secret_af_apartement
-REFRESH_TOKEN_SECRET=refresh_token_secret_af_apartement
-CONFIRMATION_EMAIL_SECRET= confirmation_email_secret_af_apartement
+ACCESS_TOKEN_SECRET=
+REFRESH_TOKEN_SECRET=
+CONFIRMATION_EMAIL_SECRET=
