@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmation Email</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <style>
+    body,
+    h1,
+    p {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(#FFFFFF 0%, #FFFFFF 60%, #999999 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 320px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding-left: 28px;
+      padding-right: 28px;
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      margin-top: 82px;
+    }
+
+    #title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .description {
+      font-size: 14px;
+      margin: 41px 28px 0px 28px;
+
+    }
+
+    .description2 {
+      font-size: 14px;
+      margin: 20px 28px 0px 28px;
+    }
+
+    .footer {
+      color: #fff;
+      text-align: center;
+      padding-bottom: 32px;
+    }
+
+    p {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <main>
+      <img
+        src="data:image/png;base64,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" />
+      <h1 id="title">Email Telah <br> Terkonfirmasi</h1>
+      <p class="description">Email berhasil terkonfirmasi, sekarang kamu dapat login aplikasi AF Apartement. Silahkan
+        menikmati layanan booking online apartement kami.</p>
+      <p class="description2">Terima kasih, pengalaman kamu menjadi prioritas utama.</p>
+    </main>
+    <footer class="footer">
+      <p>&copy; 2024 AF Apartement. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+
+</html>

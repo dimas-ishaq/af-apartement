@@ -18,7 +18,7 @@ export const userSchema = Joi.object({
       'any.required': 'Field email wajib diisi.',
     }),
   password: Joi.string()
-    .pattern(new RegExp('^[a-zA-Z0-9!@#$&*?]{3,30}$'))
+    .pattern(new RegExp('^[a-zA-Z0-9!@#$&*?]{6,16}$'))
     .required()
     .messages({
       'string.pattern.base': 'Password hanya boleh mengandung huruf, angka dan karakter dengan panjang 6-16 karakter.',
@@ -38,7 +38,7 @@ export const userSchema = Joi.object({
   }),
 })
 
-export const loginSchema = Joi.object({
+export const userLoginSchema = Joi.object({
   email: Joi.string()
     .email()
     .required()
@@ -47,10 +47,61 @@ export const loginSchema = Joi.object({
       'any.required': 'Field email wajib diisi.',
     }),
   password: Joi.string()
-    .pattern(new RegExp('^[a-zA-Z0-9!@#$&*?]{3,30}$'))
+    .pattern(new RegExp('^[a-zA-Z0-9!@#$&*?]{6,16}$'))
     .required()
     .messages({
       'string.pattern.base': 'Password hanya boleh mengandung huruf, angka dan karakter dengan panjang 6-16 karakter.',
       'any.required': 'Field password wajib diisi.',
     }),
 });
+
+export const userReqAccessTokenSchema = Joi.object({
+  refreshToken: Joi.string().required().messages({
+    'string.base': 'Refresh token harus berupa string.',
+    'any.required': 'Refresh token wajib diisi.',
+  })
+})
+
+export const userRequestResetPasswordSchema = Joi.object({
+  email: Joi.string()
+    .email()
+    .required()
+    .messages({
+      'string.email': 'Format email tidak valid.',
+      'any.required': 'Field email wajib diisi.',
+    })
+})
+
+export const userVerifyResetPasswordSchema = Joi.object({
+  email: Joi.string()
+    .email()
+    .required()
+    .messages({
+      'string.email': 'Format email tidak valid.',
+      'any.required': 'Field email wajib diisi.',
+    }),
+  pin: Joi.string()
+    .pattern(new RegExp('^[0-9]{6}$'))
+    .required()
+    .messages({
+      'string.pattern.base': 'Pin harus terdiri dari 6 digit angka.',
+      'any.required': 'Field pin wajib diisi.',
+    })
+})
+
+export const userUpdatePasswordSchema = Joi.object({
+  email: Joi.string()
+    .email()
+    .required()
+    .messages({
+      'string.email': 'Format email tidak valid.',
+      'any.required': 'Field email wajib diisi.',
+    }),
+  newPassword: Joi.string()
+    .pattern(new RegExp('^[a-zA-Z0-9!@#$&*?]{6,16}$'))
+    .required()
+    .messages({
+      'string.pattern.base': 'Password hanya boleh mengandung huruf, angka dan karakter dengan panjang 6-16 karakter.',
+      'any.required': 'Field password wajib diisi.',
+    })
+})

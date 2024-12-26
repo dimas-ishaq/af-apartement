@@ -5,6 +5,7 @@ import BadRequestError from '../../domain/exceptions/BadRequestError';
 export interface Payload {
   id: string;
   email: string;
+  role?: string
 }
 export interface ResetPasswordPayload {
   email: string;

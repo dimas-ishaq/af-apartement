@@ -1,5 +1,5 @@
 
 export default interface Session {
-  userId: string;
-  refreshToken: string;
+  user_id: string;
+  refresh_token: string;
 }
