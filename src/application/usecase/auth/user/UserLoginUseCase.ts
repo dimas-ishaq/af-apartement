@@ -12,7 +12,7 @@ interface UserLogin {
   password: string;
 }
 
-export default class LoginUseCase {
+export default class UserLoginUseCase {
   constructor(
     private userRepository: UserRepository,
     private sessionRepository: SessionRepository,
@@ -46,7 +46,7 @@ export default class LoginUseCase {
       const { accessToken, refreshToken } = this.tokenManager.generateToken(payload);
       if (accessToken && refreshToken) {
         try {
-          await this.sessionRepository.create({ userId: findUserByEmail.id, refreshToken, })
+          await this.sessionRepository.create({ user_id: findUserByEmail.id, refresh_token: refreshToken, })
           return {
             accessToken,
             refreshToken

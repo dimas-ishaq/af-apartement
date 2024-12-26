@@ -5,15 +5,22 @@ import { prisma } from "../database/prisma";
 
 export default class SessionRepositoryPrisma implements SessionRepository {
   async create(session: Session): Promise<void> {
-    const { userId, refreshToken } = session;
+    const { user_id, refresh_token } = session;
     await prisma.session.upsert({
-      where: { user_id: userId },
-      update: { refresh_token: refreshToken },
+      where: { user_id: user_id },
+      update: { refresh_token: refresh_token },
       create: {
-        user_id: userId,
-        refresh_token: refreshToken
+        user_id: user_id,
+        refresh_token: refresh_token
       },
     })
+  }
+
+  async findByToken(token: string): Promise<Session | null> {
+    return await prisma.session.findFirst({ where: { refresh_token: token } });
+  }
+  async findByUserId(user_id: string): Promise<Session | null> {
+    return await prisma.session.findUnique({ where: { user_id: user_id } })
   }
 
   async delete(id: string): Promise<void> {

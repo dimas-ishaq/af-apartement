@@ -3,10 +3,10 @@ import User from "../../../../domain/entities/User";
 import UserRepository from "../../../../domain/repository/UserRepository";
 import ConflictError from "../../../../domain/exceptions/ConflictError";
 
-export default class RegisterUseCase {
+export default class UserRegisterUseCase {
   constructor(private userRepository: UserRepository) { }
 
-  async execute(user: User) {
+  async execute(id: string, user: User) {
     const { email } = user;
     const userExists = await this.userRepository.findByEmail(email);
 
@@ -14,6 +14,6 @@ export default class RegisterUseCase {
       throw new ConflictError("User already exists");
     }
 
-    return await this.userRepository.create(user);
+    return await this.userRepository.create(id, user);
   }
 }

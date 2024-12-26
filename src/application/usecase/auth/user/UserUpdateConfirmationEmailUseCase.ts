@@ -1,7 +1,7 @@
 
 import UserRepository from "../../../../domain/repository/UserRepository";
 
-export default class UpdateConfirmationEmailUseCase {
+export default class UserUpdateConfirmationEmailUseCase {
   constructor(private userRepository: UserRepository) { }
 
   async execute(userId: string) {

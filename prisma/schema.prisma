@@ -25,7 +25,7 @@ model User {
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
-  sessions      Session[]
+  session       Session[]
   resetpassword ResetPassword[]
 }
 
@@ -43,10 +43,12 @@ model Admin {
 }
 
 model Session {
-  user_id       String @id
+  user_id       String   @id
   refresh_token String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  user User @relation(fields: [user_id], references: [id])
+  User User @relation(fields: [user_id], references: [id])
 }
 
 model ResetPassword {
@@ -54,5 +56,69 @@ model ResetPassword {
   token      String
   isValidPin Boolean @default(false)
 
-  user User @relation(fields: [email], references: [email])
+  User User @relation(fields: [email], references: [email])
+}
+
+model Category {
+  id        String   @id
+  name      String
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Building Building[]
+}
+
+model Building {
+  id          String   @id
+  id_category String
+  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  Category Category @relation(fields: [id_category], references: [id])
+}
+
+model PriceCategory {
+  id        String   @id
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Price Price[]
+}
+
+model Price {
+  id               String   @id
+  id_priceCategory String
+  name             String
+  price            Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  PriceCategory PriceCategory @relation(fields: [id_priceCategory], references: [id])
+}
+
+model UnitImage {
+  id        String   @id
+  id_unit   String
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Unit Unit @relation(fields: [id_unit], references: [id])
+}
+
+model Unit {
+  id               String @id
+  id_building      String
+  id_priceCategory String
+  id_imageUnit     String
+  name             String
+  status           String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  UnitImage UnitImage[]
 }

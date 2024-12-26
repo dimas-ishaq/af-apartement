@@ -3,16 +3,22 @@
 import Admin from "../../domain/entities/Admin";
 import AdminRepository from "../../domain/repository/AdminRepository";
 import { prisma } from "../database/prisma";
-import { nanoid } from "nanoid";
+
 
 export default class AdminRepositoryPrisma implements AdminRepository {
 
-  async create(admin: Admin): Promise<Admin> {
-    const adminId = `admin-${nanoid(16)}`
-    const createAdmin = await prisma.admin.create({ data: { id: adminId, ...admin } });
-    return createAdmin as Admin
+  async create(id: string, admin: Admin): Promise<Admin> {
+    return await prisma.admin.create({ data: { id, ...admin } }) as Admin
 
   }
+  async findByEmail(email: string): Promise<Admin | null> {
+    return await prisma.admin.findUnique({ where: { email } }) as Admin
+  }
+
+  async findById(id: string): Promise<Admin | null> {
+    return await prisma.admin.findUnique({ where: { id } }) as Admin
+  }
+
   async update(admin: Admin): Promise<Admin> {
     const updateAdmin = await prisma.admin.update({ where: { id: admin.id }, data: admin });
     return updateAdmin as Admin
@@ -20,5 +26,9 @@ export default class AdminRepositoryPrisma implements AdminRepository {
   }
   async delete(id: string): Promise<void> {
     await prisma.admin.delete({ where: { id } });
+  }
+
+  async updatePasswordByEmail(email: string, password: string): Promise<void> {
+    await prisma.admin.update({ where: { email }, data: { password } })
   }
 }
