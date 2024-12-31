@@ -18,7 +18,7 @@ export default class VerifyResetPasswordUseCase {
     if (payload.pin !== pin) {
       throw new BadRequestError("Invalid pin")
     }
-    const isValidPin = true;
-    await this.resetPasswordRepository.update(email, isValidPin);
+    const isPinValid = true;
+    await this.resetPasswordRepository.update(email, isPinValid);
   }
 }

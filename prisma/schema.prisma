@@ -24,9 +24,6 @@ model User {
   isConfirmed     Boolean   @default(false)
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
-
-  session       Session[]
-  resetpassword ResetPassword[]
 }
 
 model Admin {
@@ -45,18 +42,15 @@ model Admin {
 model Session {
   user_id       String   @id
   refresh_token String
+  type          String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-
-  User User @relation(fields: [user_id], references: [id])
 }
 
 model ResetPassword {
   email      String  @id
   token      String
-  isValidPin Boolean @default(false)
-
-  User User @relation(fields: [email], references: [email])
+  isPinValid Boolean @default(false)
 }
 
 model Category {
@@ -113,7 +107,6 @@ model Unit {
   id               String @id
   id_building      String
   id_priceCategory String
-  id_imageUnit     String
   name             String
   status           String
 

@@ -52,7 +52,7 @@ export default class UserAuthController {
       const registeredUser = await this.userRegisterUseCase.execute(id, { ...req.body, password: hashedPassword, isConfirmed: false });
       await this.userSendConfirmationEmailUseCase.execute(registeredUser.id ?? '', registeredUser.email, registeredUser.name);
       const response = {
-        id: registeredUser.id,
+        userId: registeredUser.id,
         email: registeredUser.email,
         name: registeredUser.name
       }
@@ -113,7 +113,7 @@ export default class UserAuthController {
       try {
         await this.userUpdateConfirmationEmailUseCase.execute(user as string);
         return res.sendFile(path.join(apiPath, 'website', 'confirmationEmail.html'));
-      } catch (error) {
+      } catch (error:any) {
         return res.sendFile(path.join(apiPath, 'website', 'errorConfirmationEmail.html'));
       }
     } catch (error) {
