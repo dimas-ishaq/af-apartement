@@ -48,7 +48,7 @@ export default class AdminAuthController {
         status: "success",
         message: "Admin registered successfully",
         data: {
-          id: registeredAdmin.id,
+          userId: registeredAdmin.id,
           email: registeredAdmin.email,
           name: registeredAdmin.name
         }

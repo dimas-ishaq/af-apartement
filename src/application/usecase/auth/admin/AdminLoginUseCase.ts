@@ -5,6 +5,7 @@ import PasswordHash from "../../../../infrastructure/service/PasswordHash";
 import TokenManager from "../../../../infrastructure/service/TokenManager";
 import NotFoundError from "../../../../domain/exceptions/NotFoundError";
 import AuthenticationError from "../../../../domain/exceptions/AuthenticationError";
+import { Role } from "../../../../domain/entities/Session";
 
 interface AdminLogin {
   email: string;
@@ -40,7 +41,7 @@ export default class AdminLoginUseCase {
       const { accessToken, refreshToken } = this.tokenManager.generateToken(payload);
       if (accessToken && refreshToken) {
         try {
-          await this.sessionRepository.create({ user_id: findAdminByEmail.id, refresh_token: refreshToken, })
+          await this.sessionRepository.create({ user_id: findAdminByEmail.id, refresh_token: refreshToken, type: Role.Admin })
           return {
             accessToken,
             refreshToken

@@ -56,7 +56,7 @@ export default class TokenManager {
       const payload = jwt.verify(token, process.env.CONFIRMATION_EMAIL_SECRET || "secret");
       return payload
     } catch (error) {
-      throw new BadRequestError("expired pin");
+      throw new BadRequestError("Invalid pin or expired pin");
     }
   }
 

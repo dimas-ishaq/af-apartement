@@ -5,12 +5,13 @@ import { prisma } from "../database/prisma";
 
 export default class SessionRepositoryPrisma implements SessionRepository {
   async create(session: Session): Promise<void> {
-    const { user_id, refresh_token } = session;
+    const { user_id, refresh_token, type } = session;
     await prisma.session.upsert({
       where: { user_id: user_id },
       update: { refresh_token: refresh_token },
       create: {
         user_id: user_id,
+        type: type,
         refresh_token: refresh_token
       },
     })

@@ -11,8 +11,8 @@ export default class ResetPasswordRepositoryPrisma implements ResetPasswordRepos
     return await prisma.resetPassword.findUnique({ where: { email } });
   }
 
-  async update(email: string, isValidPin: boolean): Promise<void> {
-    await prisma.resetPassword.update({ where: { email }, data: { isValidPin } });
+  async update(email: string, isPinValid: boolean): Promise<void> {
+    await prisma.resetPassword.update({ where: { email }, data: { isPinValid } });
   }
 
   async delete(email: string): Promise<void> {

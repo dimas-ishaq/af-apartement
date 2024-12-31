@@ -6,6 +6,7 @@ import NotFoundError from "../../../../domain/exceptions/NotFoundError";
 import TokenManager from "../../../../infrastructure/service/TokenManager";
 import SessionRepository from "../../../../domain/repository/SessionRepository";
 import BadRequestError from "../../../../domain/exceptions/BadRequestError";
+import { Role } from "../../../../domain/entities/Session";
 
 interface UserLogin {
   email: string;
@@ -46,7 +47,7 @@ export default class UserLoginUseCase {
       const { accessToken, refreshToken } = this.tokenManager.generateToken(payload);
       if (accessToken && refreshToken) {
         try {
-          await this.sessionRepository.create({ user_id: findUserByEmail.id, refresh_token: refreshToken, })
+          await this.sessionRepository.create({ user_id: findUserByEmail.id, refresh_token: refreshToken, type: Role.User })
           return {
             accessToken,
             refreshToken
