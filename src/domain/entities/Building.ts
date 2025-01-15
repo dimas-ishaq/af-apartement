@@ -2,6 +2,8 @@
 
 export default interface Building {
   id?: string
-  id_category: string
+  categoryId: string
   name: string
+  createdAt?: Date
+  updatedAt?: Date
 }

@@ -7,8 +7,8 @@ export default class AdminFindUnitImageByIdUnitUseCase {
   constructor(
     private unitImageRepository: UnitImageRepository
   ) { }
-  async execute(id_unit: string): Promise<UnitImage[] | null> {
-    const findUnitImageByUnitId = await this.unitImageRepository.findByUnitId(id_unit);
+  async execute(unitId: string): Promise<UnitImage[] | null> {
+    const findUnitImageByUnitId = await this.unitImageRepository.findByUnitId(unitId);
     if (!findUnitImageByUnitId) {
       throw new NotFoundError('UnitImage not found');
     }

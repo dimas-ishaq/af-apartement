@@ -1,8 +1,12 @@
-
+export enum Status{
+  AVAILABLE = "AVAILABLE",
+  UNAVAILABLE = "UNAVAILABLE"
+}
 export default interface Unit {
-  id?: string;
-  id_building: string;
-  id_priceCategory: string;
-  name: string;
-  status: string;
+  id?: string
+  buildingId: string
+  name: string
+  status: string
+  createdAt?: Date
+  updatedAt?: Date
 }

@@ -12,7 +12,7 @@ export default interface Reservation {
     buildingId: string;
     unitId: string;
     priceId: string;
-    priceCategory_Id: string;
+    priceCategoryId: string;
     checkIn: Date;
     checkOut: Date;
     status: Status;

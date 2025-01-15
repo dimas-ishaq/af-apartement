@@ -1,15 +1,12 @@
 import Building from "../../domain/entities/Building";
 import BuildingRepository from "../../domain/repository/BuildingRepository";
 import { prisma } from "../database/prisma";
-
-
-
 export default class BuildingRepositoryPrisma implements BuildingRepository {
   async create(id: string, building: Building): Promise<Building> {
     return await prisma.building.create({ data: { id, ...building } })
   }
-  async update(id: string, name?: string, id_category?: string): Promise<Building> {
-    return await prisma.building.update({ where: { id }, data: { name, id_category } })
+  async update(id: string, name?: string, categoryId?: string): Promise<Building> {
+    return await prisma.building.update({ where: { id }, data: { name, categoryId } })
   }
   async delete(id: string): Promise<void> {
     await prisma.building.delete({ where: { id } });
@@ -23,8 +20,8 @@ export default class BuildingRepositoryPrisma implements BuildingRepository {
   async findByName(name: string): Promise<Building | null> {
     return await prisma.building.findFirst({ where: { name } })
   }
-  async findByCategoryId(id_category: string): Promise<Building[] | null> {
-    return await prisma.building.findMany({ where: { id_category } })
+  async findByCategoryId(categoryId: string): Promise<Building[] | null> {
+    return await prisma.building.findMany({ where: { categoryId } })
   }
 
 }

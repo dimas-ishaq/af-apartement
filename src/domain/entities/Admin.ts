@@ -1,6 +1,6 @@
 
 enum Role {
-  Admin = "Admin"
+  ADMIN = "ADMIN"
 }
 
 export default interface Admin {
@@ -11,5 +11,5 @@ export default interface Admin {
   tanggal_lahir?: Date;
   no_telephone?: string;
   profile_picture?: string;
-  role: Role.Admin;
+  role: Role.ADMIN;
 }

@@ -1,29 +1,38 @@
 import Unit from "../../../domain/entities/Unit";
 import UnitRepository from "../../../domain/repository/UnitRepository";
 import BuildingRepository from "../../../domain/repository/BuildingRepository";
-import PriceCategoryRepository from "../../../domain/repository/PriceCategoryRepository";
 import NotFoundError from "../../../domain/exceptions/NotFoundError";
+import { Status } from "../../../domain/entities/Unit";
+import BadRequestError from "../../../domain/exceptions/BadRequestError";
+import ConflictError from "../../../domain/exceptions/ConflictError";
 
 export default class AdminUpdateUnitUseCase {
     constructor(
         private unitRepository: UnitRepository,
         private buildingRepository: BuildingRepository,
-        private priceCategoryRepository:PriceCategoryRepository
     ){}
 
-    async execute(id: string, unit: Unit): Promise<Unit> {
+    async execute(id: string, buildingId?: string, name?: string, status?: string): Promise<Unit> {
         const findUnitById = await this.unitRepository.findById(id);
-        const findBuildingById = await this.buildingRepository.findById(unit.id_building);
-        const findPriceCategoryById = await this.priceCategoryRepository.findById(unit.id_priceCategory);
         if (!findUnitById) {
             throw new NotFoundError("Unit not found");
         }
-        if (!findBuildingById) {
-            throw new NotFoundError("Building not found");
+        if(buildingId){
+            const findBuildingById = await this.buildingRepository.findById(buildingId);
+            if (!findBuildingById) {
+                throw new NotFoundError("Building not found");
+            }
         }
-        if (!findPriceCategoryById) {
-            throw new NotFoundError("PriceCategory not found");
+        if (name) {
+            const findUnitByName = await this.unitRepository.findByName(name);
+            if (findUnitByName) {
+                throw new ConflictError("Unit name already exists");
+            }
         }
-        return await this.unitRepository.update(id, unit);
+        if (status && status !== Status.AVAILABLE && status !== Status.UNAVAILABLE) {
+            throw new BadRequestError("Status value must be AVAILABLE or UNAVAILABLE");
+        }
+        
+        return await this.unitRepository.update(id, buildingId, name, status );
     }
  }
