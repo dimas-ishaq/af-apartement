@@ -47,7 +47,7 @@ export default class UserLoginUseCase {
       const { accessToken, refreshToken } = this.tokenManager.generateToken(payload);
       if (accessToken && refreshToken) {
         try {
-          await this.sessionRepository.create({ user_id: findUserByEmail.id, refresh_token: refreshToken, type: Role.User })
+          await this.sessionRepository.create({ user_id: findUserByEmail.id, refresh_token: refreshToken, type: Role.USER })
           return {
             accessToken,
             refreshToken

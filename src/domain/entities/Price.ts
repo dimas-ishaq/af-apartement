@@ -3,7 +3,7 @@
 
 export default interface Price {
   id?: string;
-  id_priceCategory: string;
+  priceCategoryId: string;
   name: string;
   price: number;
 }

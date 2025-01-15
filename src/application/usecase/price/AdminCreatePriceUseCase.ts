@@ -1,6 +1,6 @@
 import PriceRepository from "../../../domain/repository/PriceRepository";
 import Price from "../../../domain/entities/Price";
-import BadRequestError from "../../../domain/exceptions/BadRequestError";
+import ConflictError from "../../../domain/exceptions/ConflictError";
 
 export default class AdminCreatePriceUseCase {
   constructor(
@@ -10,7 +10,7 @@ export default class AdminCreatePriceUseCase {
   async execute(id:string, price: Price): Promise<Price> {
     const findPriceByName = await this.priceRepository.findByName(price.name)
     if (findPriceByName) {
-      throw new BadRequestError("Price name already exists")
+      throw new ConflictError("Price name already exists")
     }
 
     return await this.priceRepository.create(id,price)

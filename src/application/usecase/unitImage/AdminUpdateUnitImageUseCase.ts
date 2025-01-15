@@ -7,11 +7,11 @@ export default class AdminUpdateUnitImageUseCase {
     private unitImageRepository: UnitImageRepository
   ) { }
 
-  async execute(id: string, id_unit?: string, image?: string): Promise<UnitImage> {
+  async execute(id: string, unitId?: string, image?: string): Promise<UnitImage> {
     const findUnitImageById = await this.unitImageRepository.findById(id);
     if (!findUnitImageById) {
       throw new NotFoundError('UnitImage not found');
     }
-    return await this.unitImageRepository.update(id, id_unit, image);
+    return await this.unitImageRepository.update(id, unitId, image);
   }
 }

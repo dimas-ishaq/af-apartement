@@ -1,7 +1,6 @@
 import User from "../../domain/entities/User";
 import UserRepository from "../../domain/repository/UserRepository";
 import { prisma } from "../database/prisma";
-import { nanoid } from "nanoid";
 
 
 export default class UserRepositoryPrisma implements UserRepository {

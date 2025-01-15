@@ -6,6 +6,7 @@ import { Request, Response, NextFunction } from "express";
 import { categorySchema, updateCategorySchema } from "../validations/category/categorySchema";
 import BadRequestError from "../../../../domain/exceptions/BadRequestError";
 import { nanoid } from "nanoid";
+import Category from "../../../../domain/entities/Category";
 
 export default class AdminCategoryController {
 
@@ -28,7 +29,11 @@ export default class AdminCategoryController {
         status: "success",
         message: "Category created successfully",
         data: {
-          createdCategory
+          categoryId: createdCategory.id,
+          name: createdCategory.name,
+          image: createdCategory.image,
+          createdAt: createdCategory.createdAt,
+          updatedAt: createdCategory.updatedAt
         }
       })
     } catch (error) {
@@ -55,7 +60,11 @@ export default class AdminCategoryController {
         status: "success",
         message: "Category updated successfully",
         data: {
-          updatedCategory
+          categoryId: updatedCategory.id,
+          name: updatedCategory.name,
+          image: updatedCategory.image,
+          createdAt: updatedCategory.createdAt,
+          updatedAt: updatedCategory.updatedAt
         }
       })
     } catch (error) {
@@ -70,6 +79,10 @@ export default class AdminCategoryController {
         throw new BadRequestError("Id value must be available")
       }
       await this.adminDeleteCategoryUseCase.execute(id)
+      return res.status(200).json({
+        status:'success',
+        message: 'Category deleted successfully'
+      })
     } catch (error) {
       next(error)
     }
@@ -78,11 +91,18 @@ export default class AdminCategoryController {
   async findAll(req: Request, res: Response, next: NextFunction) {
     try {
       const findAllCategory = await this.adminFindAllCategoryUseCase.execute();
+      const categoryMap = findAllCategory?.map((category: Category) => {
+        return {
+          categoryId: category.id,
+          name: category.name,
+          image: category.image,
+          createdAt: category.createdAt,
+          updatedAt: category.updatedAt
+        }
+      })
       return res.status(200).json({
         status: "success",
-        data: {
-          findAllCategory
-        }
+        data: categoryMap
       })
     } catch (error) {
       next(error)

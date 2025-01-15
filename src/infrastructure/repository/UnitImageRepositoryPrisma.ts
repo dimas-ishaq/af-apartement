@@ -6,8 +6,8 @@ export default class UnitImageRepositoryPrisma implements UnitImageRepository {
   async create(id: string, unitImage: UnitImage): Promise<UnitImage> {
     return await prisma.unitImage.create({ data: { id, ...unitImage } });
   }
-  async update(id: string, id_unit?: string, image?: string): Promise<UnitImage> {
-    return await prisma.unitImage.update({ where: { id }, data: { id_unit, image } });
+  async update(id: string, unitId?: string, image?: string): Promise<UnitImage> {
+    return await prisma.unitImage.update({ where: { id }, data: { unitId, image } });
   }
   async delete(id: string): Promise<void> {
     await prisma.unitImage.delete({ where: { id } });
@@ -15,8 +15,8 @@ export default class UnitImageRepositoryPrisma implements UnitImageRepository {
   async findById(id: string): Promise<UnitImage | null> {
     return await prisma.unitImage.findUnique({ where: { id } });
   }
-  async findByUnitId(id_unit: string): Promise<UnitImage[] | null> {
-    return await prisma.unitImage.findMany({ where: { id_unit } });
+  async findByUnitId(unitId: string): Promise<UnitImage[] | null> {
+    return await prisma.unitImage.findMany({ where: { unitId } });
   }
 
 }

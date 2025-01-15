@@ -1,6 +1,6 @@
 
 export default interface UnitImage {
   id?: string;
-  id_unit: string;
+  unitId: string;
   image: string;
 }

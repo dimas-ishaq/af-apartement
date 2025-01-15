@@ -16,9 +16,9 @@ export default class AdminUnitImageController {
 
   async create(req: Request, res: Response, next: NextFunction) {
     try {
-    const {id_unit, image} = req.body
+    const {unitId, image} = req.body
     const id = `image-${nanoid(16)}`
-    await this.adminCreateUnitImageUseCase.execute(id,{id_unit,image})
+    await this.adminCreateUnitImageUseCase.execute(id,{unitId,image})
     return res.status(200).json({
       status: 'success',
       message: 'Image uploaded successfully'
@@ -30,8 +30,8 @@ export default class AdminUnitImageController {
   }
   async update(req:Request, res:Response, next:NextFunction){
     try {
-      const {id, id_unit, image} = req.body
-      await this.adminUpdateUnitImageUseCase.execute(id,id_unit, image)
+      const {id, unitId, image} = req.body
+      await this.adminUpdateUnitImageUseCase.execute(id,unitId, image)
       return res.status(200).json({
         status: 'success',
         message: 'Image unit updated successfully'
@@ -43,8 +43,8 @@ export default class AdminUnitImageController {
 
   async findByIdUnit(req:Request, res:Response, next:NextFunction){
     try {
-      const {id_unit} = req.params
-      const findImageByIdUnit =  await this.adminFindUnitImageUseCase.execute(id_unit);
+      const {unitId} = req.params
+      const findImageByIdUnit =  await this.adminFindUnitImageUseCase.execute(unitId);
       return res.status(200).json({
         status: 'success',
         data :{

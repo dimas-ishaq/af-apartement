@@ -1,10 +1,9 @@
-
 export enum Role{
-  User = "User",
-  Admin = "Admin"
+  ADMIN='ADMIN',
+  USER='USER'
 }
 export default interface Session {
   user_id :string;
   refresh_token: string;
-  type: string;
+  type:string;
 }
